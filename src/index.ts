@@ -19,11 +19,18 @@ const MIME_TYPE = 'application/vnd.jupyter.chat.components';
 /**
  * The class name added to the extension.
  */
-const CLASS_NAME = 'jp-RenderedComponents';
+const CLASS_NAME = 'jp-RenderedChatComponents';
 
+/**
+ * The options for the chat components renderer.
+ */
 interface IComponentsRendererOptions extends IRenderMime.IRendererOptions {
+  /**
+   * The callback to approve or reject a tool.
+   */
   toolCallApproval: ToolCallApproval;
 }
+
 /**
  * A widget for rendering .
  */
@@ -70,27 +77,38 @@ export class ComponentsRenderer
   private _toolCallApproval: ToolCallApproval;
 }
 
-export interface IComponentsRendererFactory extends IRenderMime.IRendererFactory {
+/**
+ * The interface for components renderer factory.
+ */
+export interface IComponentsRendererFactory
+  extends IRenderMime.IRendererFactory {
+  /**
+   * The callback to approve or reject a tool.
+   */
   toolCallApproval: ToolCallApproval;
 }
+
 /**
- * A mime renderer factory for  data.
+ * A mime renderer factory for chat components.
  */
 class RendererFactory implements IComponentsRendererFactory {
   readonly safe = true;
   readonly mimeTypes = [MIME_TYPE];
   toolCallApproval: ToolCallApproval = null;
   createRenderer = (options: IRenderMime.IRendererOptions) => {
-    return new ComponentsRenderer({ ...options, toolCallApproval: this.toolCallApproval });
-  }
-};
+    return new ComponentsRenderer({
+      ...options,
+      toolCallApproval: this.toolCallApproval
+    });
+  };
+}
 
 /**
- * Extension definition.
+ * The MIME renderer extension.
  */
 const extension: IRenderMime.IExtension = {
   id: 'jupyter-chat-components:plugin',
-  // description: 'Adds MIME type renderer for  content',
+  description: 'Adds MIME type renderer for chat components',
   rendererFactory: new RendererFactory(),
   rank: 100,
   dataType: 'string'

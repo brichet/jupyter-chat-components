@@ -1,7 +1,10 @@
 import { TranslationBundle } from '@jupyterlab/translation';
 
+/**
+ * The callback to approve or reject a tool.
+ */
 export type ToolCallApproval =
-  ((targetId: string, approvalId: string, isApprove: boolean) => void)
+  | ((targetId: string, approvalId: string, approve: boolean) => void)
   | null;
 
 /**
@@ -114,8 +117,16 @@ const getStatusText = (
 export function buildToolCallHtml(
   options: IToolCallHtmlOptions
 ): HTMLDetailsElement {
-  const { toolName, input, status, summary, output, targetId, approvalId, trans } =
-    options;
+  const {
+    toolName,
+    input,
+    status,
+    summary,
+    output,
+    targetId,
+    approvalId,
+    trans
+  } = options;
   const config = STATUS_CONFIG[status];
   const statusText = getStatusText(status, trans);
   const escapedToolName = escapeHtml(toolName);
@@ -197,8 +208,12 @@ export function buildToolCallHtml(
     approvalButtonsDiv.appendChild(rejectBtn);
     body.appendChild(approvalButtonsDiv);
 
-    approveBtn.addEventListener('click', () => options.toolCallApproval?.(targetId, approvalId, true));
-    rejectBtn.addEventListener('click', () => options.toolCallApproval?.(targetId, approvalId, false));
+    approveBtn.addEventListener('click', () =>
+      options.toolCallApproval?.(targetId, approvalId, true)
+    );
+    rejectBtn.addEventListener('click', () =>
+      options.toolCallApproval?.(targetId, approvalId, false)
+    );
   }
 
   // Add output/result section if provided
