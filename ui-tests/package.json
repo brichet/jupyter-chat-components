@@ -1,7 +1,7 @@
 {
-  "name": "jupyter-ai-chat-components-ui-tests",
+  "name": "jupyter-chat-components-ui-tests",
   "version": "1.0.0",
-  "description": "JupyterLab jupyter-ai-chat-components Integration Tests",
+  "description": "JupyterLab jupyter-chat-components Integration Tests",
   "private": true,
   "scripts": {
     "start": "jupyter lab --config jupyter_server_test_config.py",

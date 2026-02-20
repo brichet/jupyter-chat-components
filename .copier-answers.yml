@@ -10,12 +10,12 @@ file_extension: ''
 has_ai_rules: true
 has_binder: false
 kind: mimerenderer
-labextension_name: jupyter-ai-chat-components
+labextension_name: jupyter-chat-components
 mimetype: application/vnd.jupyter.chat.components
 mimetype_name: ''
 project_short_description: Components to displayed in jupyter chat
-python_name: jupyter_ai_chat_components
-repository: https://github.com/brichet/jupyter-ai-chat-components
+python_name: jupyter_chat_components
+repository: https://github.com/brichet/jupyter-chat-components
 test: true
 viewer_name: ''
 

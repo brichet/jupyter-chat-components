@@ -26,5 +26,5 @@ jobs:
       - name: Upload Distributions
         uses: actions/upload-artifact@v4
         with:
-          name: jupyter_ai_chat_components-releaser-dist-${{ github.run_number }}
+          name: jupyter_chat_components-releaser-dist-${{ github.run_number }}
           path: .jupyter_releaser_checkout/dist

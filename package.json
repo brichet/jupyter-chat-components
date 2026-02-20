@@ -1,5 +1,5 @@
 {
-    "name": "jupyter-ai-chat-components",
+    "name": "jupyter-chat-components",
     "version": "0.1.0",
     "description": "Components to displayed in jupyter chat",
     "keywords": [
@@ -7,9 +7,9 @@
         "jupyterlab",
         "jupyterlab-extension"
     ],
-    "homepage": "https://github.com/brichet/jupyter-ai-chat-components",
+    "homepage": "https://github.com/brichet/jupyter-chat-components",
     "bugs": {
-        "url": "https://github.com/brichet/jupyter-ai-chat-components/issues"
+        "url": "https://github.com/brichet/jupyter-chat-components/issues"
     },
     "license": "BSD-3-Clause",
     "author": {
@@ -26,7 +26,7 @@
     "style": "style/index.css",
     "repository": {
         "type": "git",
-        "url": "https://github.com/brichet/jupyter-ai-chat-components.git"
+        "url": "https://github.com/brichet/jupyter-chat-components.git"
     },
     "scripts": {
         "build": "jlpm build:lib && jlpm build:labextension:dev",
@@ -38,7 +38,7 @@
         "clean": "jlpm clean:lib",
         "clean:lib": "rimraf lib tsconfig.tsbuildinfo",
         "clean:lintcache": "rimraf .eslintcache .stylelintcache",
-        "clean:labextension": "rimraf jupyter_ai_chat_components/labextension jupyter_ai_chat_components/_version.py",
+        "clean:labextension": "rimraf jupyter_chat_components/labextension jupyter_chat_components/_version.py",
         "clean:all": "jlpm clean:lib && jlpm clean:labextension && jlpm clean:lintcache",
         "eslint": "jlpm eslint:check --fix",
         "eslint:check": "eslint . --cache --ext .ts,.tsx",
@@ -100,7 +100,7 @@
     },
     "jupyterlab": {
         "mimeExtension": true,
-        "outputDir": "jupyter_ai_chat_components/labextension"
+        "outputDir": "jupyter_chat_components/labextension"
     },
     "eslintIgnore": [
         "node_modules",

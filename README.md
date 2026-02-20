@@ -1,6 +1,6 @@
-# jupyter_ai_chat_components
+# jupyter_chat_components
 
-[![Github Actions Status](https://github.com/brichet/jupyter-ai-chat-components/workflows/Build/badge.svg)](https://github.com/brichet/jupyter-ai-chat-components/actions/workflows/build.yml)
+[![Github Actions Status](https://github.com/brichet/jupyter-chat-components/workflows/Build/badge.svg)](https://github.com/brichet/jupyter-chat-components/actions/workflows/build.yml)
 
 Components to displayed in jupyter chat
 
@@ -13,7 +13,7 @@ Components to displayed in jupyter chat
 To install the extension, execute:
 
 ```bash
-pip install jupyter_ai_chat_components
+pip install jupyter_chat_components
 ```
 
 ## Uninstall
@@ -21,7 +21,7 @@ pip install jupyter_ai_chat_components
 To remove the extension, execute:
 
 ```bash
-pip uninstall jupyter_ai_chat_components
+pip uninstall jupyter_chat_components
 ```
 
 ## Contributing
@@ -36,7 +36,7 @@ The `jlpm` command is JupyterLab's pinned version of
 
 ```bash
 # Clone the repo to your local environment
-# Change directory to the jupyter_ai_chat_components directory
+# Change directory to the jupyter_chat_components directory
 
 # Set up a virtual environment and install package in development mode
 python -m venv .venv
@@ -72,12 +72,12 @@ jupyter lab build --minimize=False
 ### Development uninstall
 
 ```bash
-pip uninstall jupyter_ai_chat_components
+pip uninstall jupyter_chat_components
 ```
 
 In development mode, you will also need to remove the symlink created by `jupyter labextension develop`
 command. To find its location, you can run `jupyter labextension list` to figure out where the `labextensions`
-folder is located. Then you can remove the symlink named `jupyter-ai-chat-components` within that folder.
+folder is located. Then you can remove the symlink named `jupyter-chat-components` within that folder.
 
 ### Testing the extension
 

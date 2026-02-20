@@ -1,4 +1,4 @@
-# Making a new release of jupyter_ai_chat_components
+# Making a new release of jupyter_chat_components
 
 The extension can be published to `PyPI` and `npm` manually or using the [Jupyter Releaser](https://github.com/jupyter-server/jupyter_releaser).
 

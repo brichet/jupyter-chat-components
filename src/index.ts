@@ -89,7 +89,7 @@ class RendererFactory implements IComponentsRendererFactory {
  * Extension definition.
  */
 const extension: IRenderMime.IExtension = {
-  id: 'jupyter-ai-chat-components:plugin',
+  id: 'jupyter-chat-components:plugin',
   // description: 'Adds MIME type renderer for  content',
   rendererFactory: new RendererFactory(),
   rank: 100,
