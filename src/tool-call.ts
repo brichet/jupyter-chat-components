@@ -1,22 +1,6 @@
 import { TranslationBundle } from '@jupyterlab/translation';
 
-/**
- * The callback to approve or reject a tool.
- */
-export type ToolCallApproval =
-  | ((targetId: string, approvalId: string, approve: boolean) => void)
-  | null;
-
-/**
- * Tool call status types.
- */
-export type ToolStatus =
-  | 'pending'
-  | 'awaiting_approval'
-  | 'approved'
-  | 'rejected'
-  | 'completed'
-  | 'error';
+import { IToolCallMetadata, ToolCallApproval, ToolCallStatus } from './token';
 
 /**
  * Configuration for rendering tool call status.
@@ -27,7 +11,7 @@ interface IStatusConfig {
   open?: boolean;
 }
 
-const STATUS_CONFIG: Record<ToolStatus, IStatusConfig> = {
+const STATUS_CONFIG: Record<ToolCallStatus, IStatusConfig> = {
   pending: {
     cssClass: 'jp-ai-tool-pending',
     statusClass: 'jp-ai-tool-status-pending'
@@ -58,14 +42,7 @@ const STATUS_CONFIG: Record<ToolStatus, IStatusConfig> = {
 /**
  * Options for building tool call HTML.
  */
-export interface IToolCallHtmlOptions {
-  toolName: string;
-  input: string;
-  status: ToolStatus;
-  summary?: string;
-  output?: string;
-  targetId?: string;
-  approvalId?: string;
+export interface IToolCallHtmlOptions extends IToolCallMetadata {
   trans: TranslationBundle;
   toolCallApproval: ToolCallApproval;
 }
@@ -92,7 +69,7 @@ export function escapeHtml(value: string): string {
  * Returns the translated status text for a given tool status.
  */
 const getStatusText = (
-  status: ToolStatus,
+  status: ToolCallStatus,
   trans: TranslationBundle
 ): string => {
   switch (status) {

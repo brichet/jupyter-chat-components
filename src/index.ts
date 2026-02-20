@@ -1,3 +1,10 @@
+import {
+  JupyterFrontEnd,
+  JupyterFrontEndPlugin
+} from '@jupyterlab/application';
+
+import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
+
 import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
 
 import { nullTranslator, TranslationBundle } from '@jupyterlab/translation';
@@ -5,11 +12,12 @@ import { nullTranslator, TranslationBundle } from '@jupyterlab/translation';
 import { Widget } from '@lumino/widgets';
 
 import {
-  buildToolCallHtml,
-  IToolCallHtmlOptions,
-  ToolCallApproval,
-  ToolStatus
-} from './tool-call';
+  IComponentsRendererFactory,
+  IToolCallMetadata,
+  ToolCallApproval
+} from './token';
+
+import { buildToolCallHtml, IToolCallHtmlOptions } from './tool-call';
 
 /**
  * The default mime type for the extension.
@@ -57,13 +65,7 @@ export class ComponentsRenderer
     const metadata = { ...model.metadata };
     if (data === 'tool-call') {
       const toolCallOptions: IToolCallHtmlOptions = {
-        toolName: metadata.toolName as string,
-        input: metadata.input as string,
-        status: metadata.status as ToolStatus,
-        summary: (metadata.summary as string) ?? undefined,
-        output: (metadata.output as string) ?? undefined,
-        targetId: (metadata.targetId as string) ?? undefined,
-        approvalId: (metadata.approvalId as string) ?? undefined,
+        ...(metadata as unknown as IToolCallMetadata),
         trans: this._trans,
         toolCallApproval: this._toolCallApproval
       };
@@ -78,22 +80,12 @@ export class ComponentsRenderer
 }
 
 /**
- * The interface for components renderer factory.
- */
-export interface IComponentsRendererFactory
-  extends IRenderMime.IRendererFactory {
-  /**
-   * The callback to approve or reject a tool.
-   */
-  toolCallApproval: ToolCallApproval;
-}
-
-/**
  * A mime renderer factory for chat components.
  */
 class RendererFactory implements IComponentsRendererFactory {
   readonly safe = true;
   readonly mimeTypes = [MIME_TYPE];
+  readonly defaultRank = 100;
   toolCallApproval: ToolCallApproval = null;
   createRenderer = (options: IRenderMime.IRendererOptions) => {
     return new ComponentsRenderer({
@@ -103,15 +95,21 @@ class RendererFactory implements IComponentsRendererFactory {
   };
 }
 
-/**
- * The MIME renderer extension.
- */
-const extension: IRenderMime.IExtension = {
+const plugin: JupyterFrontEndPlugin<IComponentsRendererFactory> = {
   id: 'jupyter-chat-components:plugin',
   description: 'Adds MIME type renderer for chat components',
-  rendererFactory: new RendererFactory(),
-  rank: 100,
-  dataType: 'string'
+  autoStart: true,
+  provides: IComponentsRendererFactory,
+  requires: [IRenderMimeRegistry],
+  activate: (
+    app: JupyterFrontEnd,
+    rendermime: IRenderMimeRegistry
+  ): IComponentsRendererFactory => {
+    const rendererFactory = new RendererFactory();
+    rendermime.addFactory(rendererFactory);
+    return rendererFactory;
+  }
 };
 
-export default extension;
+export * from './token';
+export default plugin;
