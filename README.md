@@ -4,17 +4,6 @@
 
 A library of React components designed for use in Jupyter chat interfaces, with a focus on AI-powered interactions. These components are intended to be integrated into JupyterLab extensions that provide chat functionality.
 
-## Component registry
-
-This extension provides a `IComponentRegistry` token that other JupyterLab extensions can consume to register or retrieve React components by name. The registry exposes the following methods:
-
-- `add(name, component)` — register a new React component under a unique name
-- `get(name)` — retrieve a registered component by name
-- `has(name)` — check whether a component is registered
-- `getNames()` — list all registered component names
-
-This makes the system extensible: third-party extensions can add their own components to the registry.
-
 ## MIME renderer
 
 Components are exposed through a custom MIME type: `application/vnd.jupyter.chat.components`.
@@ -24,7 +13,18 @@ This extension registers a MIME renderer factory with JupyterLab's render MIME r
 - the **data** value is the component name (e.g. `"tool-call"`)
 - the **metadata** contains the props to pass to the component
 
-Any JupyterLab extension can then render chat components in notebook outputs or chat messages by emitting that MIME type.
+The MIME renderer looks up the component name in the factory's registry and renders the corresponding React component.
+
+## Component registry
+
+The registry is available directly on the `IComponentsRendererFactory` token as the `registry` property. It maps component names to React components and exposes the following methods:
+
+- `add(name, component)` — register a new React component under a unique name
+- `get(name)` — retrieve a registered component by name
+- `has(name)` — check whether a component is registered
+- `getNames()` — list all registered component names
+
+Other JupyterLab extensions can consume the `IComponentsRendererFactory` token and use `registry.add()` to register their own components, which will then be available for rendering via the MIME bundle.
 
 ## Available components
 
