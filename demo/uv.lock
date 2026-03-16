@@ -420,7 +420,7 @@ name = "exceptiongroup"
 version = "1.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
+    { name = "typing-extensions", marker = "python_full_version < '3.11'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/50/79/66800aadf48771f6b62f7eb014e352e5d06856655206165d775e675a02c9/exceptiongroup-1.3.1.tar.gz", hash = "sha256:8b412432c6055b0b7d14c310000ae93352ed6754f70fa8f7c34141f91c4e3219", size = 30371, upload-time = "2025-11-21T23:01:54.787Z" }
 wheels = [
@@ -719,7 +719,7 @@ dependencies = [
     { name = "jupyter-chat-components" },
     { name = "jupyterlab" },
     { name = "jupyterlite-core" },
-    { name = "jupyterlite-pyodide-kernel" },
+    { name = "jupyterlite-javascript-kernel" },
 ]
 
 [package.metadata]
@@ -727,7 +727,7 @@ requires-dist = [
     { name = "jupyter-chat-components", directory = "../" },
     { name = "jupyterlab", specifier = ">=4.5.0" },
     { name = "jupyterlite-core", specifier = ">=0.7.0" },
-    { name = "jupyterlite-pyodide-kernel", specifier = ">=0.7.0" },
+    { name = "jupyterlite-javascript-kernel", specifier = ">=0.4.0a1" },
 ]
 
 [[package]]
@@ -900,16 +900,12 @@ wheels = [
 ]
 
 [[package]]
-name = "jupyterlite-pyodide-kernel"
-version = "0.7.1"
+name = "jupyterlite-javascript-kernel"
+version = "0.4.0a3"
 source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "jupyterlite-core" },
-    { name = "pkginfo" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/86/fe/5f9e535f1e15852cb5e5745aeb9d4e9b4eb67282c3e7402d2ca823c76c1f/jupyterlite_pyodide_kernel-0.7.1.tar.gz", hash = "sha256:5e52c57190057d816e8551db1b2541f9c0398f71ea54ca47004886db6931cd6c", size = 545914, upload-time = "2026-03-03T07:17:05.245Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a6/53/a672737da784306823d666f9394294fe78e6dcc4085b11eeef243d201824/jupyterlite_javascript_kernel-0.4.0a3.tar.gz", hash = "sha256:6a3159ce92cb328826f8e4fcdaba48f16c29d160ceb0cd00814b122792d59b7e", size = 323484, upload-time = "2026-03-09T17:33:24.963Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/94/03/65978831184bf53ebe3d3d07b83a540c9fa253bbf244d2ae92a6f0c758dc/jupyterlite_pyodide_kernel-0.7.1-py3-none-any.whl", hash = "sha256:3176bea5b471ca412514e87746c4804945ada8b4329754a4a0e027fdc92edfa3", size = 560227, upload-time = "2026-03-03T07:17:03.108Z" },
+    { url = "https://files.pythonhosted.org/packages/86/0a/422795eae3b82c772293587c5179ff34b69601baac3c20fd451b4c8e48ce/jupyterlite_javascript_kernel-0.4.0a3-py3-none-any.whl", hash = "sha256:498e19b6e6ef7617a88232a76dc807f43f8fc0b30e7d696992b1a6c702a2d016", size = 91701, upload-time = "2026-03-09T17:33:23.177Z" },
 ]
 
 [[package]]
@@ -1152,15 +1148,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/42/92/cc564bf6381ff43ce1f4d06852fc19a2f11d180f23dc32d9588bee2f149d/pexpect-4.9.0.tar.gz", hash = "sha256:ee7d41123f3c9911050ea2c2dac107568dc43b2d3b0c7557a33212c398ead30f", size = 166450, upload-time = "2023-11-25T09:07:26.339Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/9e/c3/059298687310d527a58bb01f3b1965787ee3b40dce76752eda8b44e9a2c5/pexpect-4.9.0-py2.py3-none-any.whl", hash = "sha256:7236d1e080e4936be2dc3e326cec0af72acf9212a7e1d060210e70a47e253523", size = 63772, upload-time = "2023-11-25T06:56:14.81Z" },
-]
-
-[[package]]
-name = "pkginfo"
-version = "1.12.1.2"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/24/03/e26bf3d6453b7fda5bd2b84029a426553bb373d6277ef6b5ac8863421f87/pkginfo-1.12.1.2.tar.gz", hash = "sha256:5cd957824ac36f140260964eba3c6be6442a8359b8c48f4adf90210f33a04b7b", size = 451828, upload-time = "2025-02-19T15:27:37.188Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/fa/3d/f4f2ba829efb54b6cd2d91349c7463316a9cc55a43fc980447416c88540f/pkginfo-1.12.1.2-py3-none-any.whl", hash = "sha256:c783ac885519cab2c34927ccfa6bf64b5a704d7c69afaea583dd9b7afe969343", size = 32717, upload-time = "2025-02-19T15:27:33.071Z" },
 ]
 
 [[package]]
