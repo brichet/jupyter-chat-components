@@ -8,9 +8,7 @@ import { ReadonlyPartialJSONValue } from '@lumino/coreutils';
 
 import * as React from 'react';
 
-import { ToolCall } from './components';
-
-import { InlineDiff } from './components/inline-diff';
+import { InlineDiff, ToolCall } from './components';
 
 import { ComponentRegistry } from './registry';
 

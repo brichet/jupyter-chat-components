@@ -31,6 +31,6 @@ const factory: JupyterFrontEndPlugin<IComponentsRendererFactory> = {
 export * from './token';
 export * from './factory';
 export * from './registry';
-export * from './components/inline-diff';
+export * from './components';
 
 export default factory;

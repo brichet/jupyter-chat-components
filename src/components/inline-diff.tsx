@@ -17,13 +17,6 @@ interface IDiffLineInfo {
   key: string;
 }
 
-/**
- * Props for rendering inline diff content.
- */
-export interface IInlineDiffRenderOptions extends IInlineDiffMetadata {
-  trans: TranslationBundle;
-}
-
 export interface IInlineDiffProps extends IInlineDiffMetadata {
   trans?: TranslationBundle;
 }
@@ -111,7 +104,7 @@ function DiffBlock({
 }): JSX.Element {
   const filename = getDiffFilename(diff.path);
   const [expanded, setExpanded] = React.useState(false);
-  const allLines = buildDiffLines(diff);
+  const allLines = React.useMemo(() => buildDiffLines(diff), [diff]);
   const canTruncate = allLines.length > MAX_DIFF_LINES;
   const visibleLines =
     canTruncate && !expanded ? allLines.slice(0, MAX_DIFF_LINES) : allLines;
