@@ -22,6 +22,13 @@ export type ToolCallApproval =
   | null;
 
 /**
+ * The callback to remove a queued message.
+ */
+export type RemoveQueuedMessage =
+  | ((targetId: string, messageId: string) => void)
+  | null;
+
+/**
  * The interface for components renderer factory.
  */
 export interface IComponentsRendererFactory
@@ -35,6 +42,11 @@ export interface IComponentsRendererFactory
    * The callback to approve or reject a tool.
    */
   toolCallApproval: ToolCallApproval;
+
+  /**
+   * The callback to remove a queued message.
+   */
+  removeQueuedMessage: RemoveQueuedMessage;
 }
 
 /**
@@ -97,4 +109,20 @@ export interface IInlineDiff {
  */
 export interface IInlineDiffMetadata {
   diffs: IInlineDiff[];
+}
+
+/**
+ * A single queued message entry.
+ */
+export interface IQueuedMessage {
+  id: string;
+  body: string;
+}
+
+/**
+ * Metadata for the message queue component.
+ */
+export interface IMessageQueueMetadata {
+  messages: IQueuedMessage[];
+  targetId?: string;
 }

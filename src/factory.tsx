@@ -8,13 +8,14 @@ import { ReadonlyPartialJSONValue } from '@lumino/coreutils';
 
 import * as React from 'react';
 
-import { InlineDiff, ToolCall } from './components';
+import { InlineDiff, MessageQueue, ToolCall } from './components';
 
 import { ComponentRegistry } from './registry';
 
 import {
   IComponentRegistry,
   IComponentsRendererFactory,
+  RemoveQueuedMessage,
   ToolCallApproval
 } from './token';
 
@@ -42,6 +43,11 @@ interface IComponentsRendererOptions extends IRenderMime.IRendererOptions {
   toolCallApproval?: ToolCallApproval;
 
   /**
+   * The callback to remove a queued message.
+   */
+  removeQueuedMessage?: RemoveQueuedMessage;
+
+  /**
    * The component registry.
    */
   registry: IComponentRegistry;
@@ -62,6 +68,7 @@ export class ComponentsRenderer
     this._trans = (options.translator ?? nullTranslator).load('jupyterlab');
     this._mimeType = options.mimeType;
     this._toolCallApproval = options.toolCallApproval;
+    this._removeQueuedMessage = options.removeQueuedMessage;
     this._registry = options.registry;
     this.addClass(CLASS_NAME);
   }
@@ -93,12 +100,17 @@ export class ComponentsRenderer
       componentsProps.toolCallApproval = this._toolCallApproval;
     }
 
+    if (this._data === 'message-queue') {
+      componentsProps.removeQueuedMessage = this._removeQueuedMessage;
+    }
+
     return <Component {...componentsProps} trans={this._trans} />;
   }
 
   private _trans: TranslationBundle;
   private _mimeType: string;
   private _toolCallApproval?: ToolCallApproval;
+  private _removeQueuedMessage?: RemoveQueuedMessage;
   private _registry: IComponentRegistry;
   private _data: string | null = null;
   private _metadata: ReadonlyPartialJSONValue | null = null;
@@ -113,17 +125,20 @@ export class RendererFactory implements IComponentsRendererFactory {
   readonly defaultRank = 100;
   readonly registry: ComponentRegistry;
   toolCallApproval: ToolCallApproval = null;
+  removeQueuedMessage: RemoveQueuedMessage = null;
 
   constructor() {
     this.registry = new ComponentRegistry();
     this.registry.add('tool-call', ToolCall);
     this.registry.add('inline-diff', InlineDiff);
+    this.registry.add('message-queue', MessageQueue);
   }
 
   createRenderer = (options: IRenderMime.IRendererOptions) => {
     return new ComponentsRenderer({
       ...options,
       toolCallApproval: this.toolCallApproval,
+      removeQueuedMessage: this.removeQueuedMessage,
       registry: this.registry
     });
   };
