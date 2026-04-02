@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useEffect, useRef } from 'react';
 
 import {
   IComponentProps,
@@ -26,33 +25,16 @@ export const MessageQueue: React.FC<IMessageQueueProps> = ({
   trans,
   removeQueuedMessage
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (containerRef.current) {
-      // Find the parent Jupyter chat message container and make it sticky
-      // This is a bit too adhoc but works for now
-      const msgWrapper = containerRef.current.closest('.jp-chat-message') as HTMLElement;
-      if (msgWrapper) {
-        msgWrapper.style.position = 'sticky';
-        msgWrapper.style.bottom = '10px';
-        msgWrapper.style.zIndex = '10';
-        msgWrapper.style.pointerEvents = 'none';
-      }
-    }
-  }, [messages]);
-
   if (!messages || messages.length === 0) {
     return null;
   }
 
   return (
-    <div className="jp-chat-message-queue" ref={containerRef}>
+    <div className="jp-chat-message-queue">
       {messages.map(msg => (
         <div
           key={msg.id}
           className="jp-chat-message-queue-bubble"
-          title={msg.body}
         >
           <span className="jp-chat-message-queue-text">{msg.body}</span>
           {removeQueuedMessage && targetId && (

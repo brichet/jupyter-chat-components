@@ -323,3 +323,62 @@
   color: var(--jp-ui-font-color1);
   text-decoration: underline;
 }
+
+/* Message Queue Styling */
+.jp-chat-message-queue {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  pointer-events: none;
+  width: 100%;
+}
+
+.jp-chat-message-queue-bubble {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--jp-layout-color2);
+  border: 1px solid var(--jp-border-color1);
+  border-radius: 16px;
+  padding: 4px 28px 4px 12px;
+  pointer-events: auto;
+}
+
+.jp-chat-message-queue-text {
+  font-size: var(--jp-ui-font-size0);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.jp-chat-message-queue-remove {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--jp-ui-font-color2);
+  font-size: 10px;  
+  cursor: pointer;
+  opacity: 0;
+}
+
+.jp-chat-message-queue-bubble:hover .jp-chat-message-queue-remove {
+  opacity: 1;
+}
+
+.jp-chat-message-queue-remove:hover {
+  background: var(--jp-layout-color3);
+  color: var(--jp-ui-font-color1);
+}
+
