@@ -10,8 +10,7 @@ import {
  * Props for the MessageQueue component.
  */
 export interface IMessageQueueProps
-  extends IComponentProps,
-    IMessageQueueMetadata {
+  extends IComponentProps, IMessageQueueMetadata {
   removeQueuedMessage?: RemoveQueuedMessage;
 }
 
@@ -32,10 +31,7 @@ export const MessageQueue: React.FC<IMessageQueueProps> = ({
   return (
     <div className="jp-chat-message-queue">
       {messages.map(msg => (
-        <div
-          key={msg.id}
-          className="jp-chat-message-queue-bubble"
-        >
+        <div key={msg.id} className="jp-chat-message-queue-bubble">
           <span className="jp-chat-message-queue-text">{msg.body}</span>
           {removeQueuedMessage && targetId && (
             <button
